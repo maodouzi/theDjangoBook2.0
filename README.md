@@ -41,5 +41,3 @@ theDjangoBook2.0
 	1.	Dynamic Url
 
 		1.	multi-url => view
-
-1. 

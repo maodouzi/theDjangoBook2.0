@@ -12,8 +12,14 @@ theDjangoBook2.0
 	
 	1.	Init
 		
-		sudo pip install django
-		sudo chmod a+r -R /usr/local/lib/python2.7/dist-packages/
+			sudo pip install django
+			sudo chmod a+r -R /usr/local/lib/python2.7/dist-packages/
+			django-admin.py startproject mysite
+			cd mysite
+			./manage.py runserver 0.0.0.0:8080			
+
+			http://localhost:8080/
 	
+	1.	
 
 1. 

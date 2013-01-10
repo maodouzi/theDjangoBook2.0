@@ -392,4 +392,263 @@ theDjangoBook2.0
 			$ export DJANGO_SETTINGS_MODULE=mysite.settings
 			>>> from django.db import connection
 			>>> cursor = connection.cursor()
+	
+	1.	First App
+
+			$ cd mysite
+			$ python ../manage.py startapp books
+			Modify books/model.py & Install app in settings.py
+			$ cd ..
+			$ python manage.py validate
+			$ python manage.py sqlall books	=> show the create sql statements.
+			$ python manage.py syncdb
+
+			http://localhost:8080/first_app/
+
+			>>> from mysite.books.models import Publisher
+			>>> p1 = Publisher(name='Apress', address='2855 Telegraph Avenue',
+			...     city='Berkeley', state_province='CA', country='U.S.A.',
+			...     website='http://www.apress.com/')
+			>>> p1.save()
+			>>> p2 = Publisher(name="O'Reilly", address='10 Fawcett St.',
+			...     city='Cambridge', state_province='MA', country='U.S.A.',
+			...     website='http://www.oreilly.com/')
+			>>> p2.save()
+			>>> publisher_list = Publisher.objects.all()
+			>>> publisher_list
+			[<Publisher: Publisher object>, <Publisher: Publisher object>]
+
+		Init & Save at the same time, use create, Notice the last line, with __unicode__, change Publish instances output:
+
+			>>> p1 = Publisher.objects.create(name='Apress',
+			...     address='2855 Telegraph Avenue',
+			...     city='Berkeley', state_province='CA', country='U.S.A.',
+			...     website='http://www.apress.com/')
+			>>> p2 = Publisher.objects.create(name="O'Reilly",
+			...     address='10 Fawcett St.', city='Cambridge',
+			...     state_province='MA', country='U.S.A.',
+			...     website='http://www.oreilly.com/')
+			>>> publisher_list = Publisher.objects.all()
+			>>> publisher_list
+			>>> [<Publisher: Apress>, <Publisher: O'Reilly>]
+
+	1.	SQL translation
+
+		Insert:
+
+			>>> p = Publisher(name='Apress',
+			...         address='2855 Telegraph Ave.',
+			...         city='Berkeley',
+			...         state_province='CA',
+			...         country='U.S.A.',
+			...         website='http://www.apress.com/')
+			>>> p.save()
+
+			INSERT INTO books_publisher
+				(name, address, city, state_province, country, website)
+			VALUES
+				('Apress', '2855 Telegraph Ave.', 'Berkeley', 'CA', 'U.S.A.', 'http://www.apress.com/');
+
+		Index 
+
+			>>> p.id
+			52    # this will differ based on your own data
+
+		Update
+		
+			>>> p.name = 'Apress Publishing'	
+			>>> p.save()
+
+			UPDATE books_publisher SET
+				name = 'Apress Publishing',
+				address = '2855 Telegraph Ave.',
+				city = 'Berkeley',
+				state_province = 'CA',
+				country = 'U.S.A.',
+				website = 'http://www.apress.com'
+			WHERE id = 52;
+
+			UPDATE books_publisher SET
+				name = 'Apress Publishing'
+			WHERE id=52;
+
+		Selecting Objects
+
+			>>> Publisher.objects.all()
+			[<Publisher: Apress>, <Publisher: O'Reilly>]
+
+			SELECT id, name, address, city, state_province, country, website FROM books_publisher;
+
+		Filter
+
+			>>> Publisher.objects.filter(name='Apress')
+			[<Publisher: Apress>]
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			WHERE name = 'Apress';
+
+			>>> Publisher.objects.filter(country="U.S.A.", state_province="CA")
+			[<Publisher: Apress>]
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			WHERE country = 'U.S.A.'
+			AND state_province = 'CA';
+
+			>>> Publisher.objects.filter(name__contains="press")
+			[<Publisher: Apress>]
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			WHERE name LIKE '%press%';
+
+		Retrieving Single Objects
+			
+			>>> Publisher.objects.get(name="Apress")
+			<Publisher: Apress>
+
+			>>> Publisher.objects.get(country="U.S.A.")
+			Traceback (most recent call last):
+				...
+			MultipleObjectsReturned: get() returned more than one Publisher --
+				it returned 2! Lookup parameters were {'country': 'U.S.A.'}
+
+			>>> Publisher.objects.get(name="Penguin")
+			Traceback (most recent call last):
+				...
+			DoesNotExist: Publisher matching query does not exist.
+
+			The DoesNotExist exception is an attribute of the model¡¯s class ¨C Publisher.DoesNotExist. In your applications, you¡¯ll want to trap these exceptions, like this:
+
+			try:
+				p = Publisher.objects.get(name='Apress')
+			except Publisher.DoesNotExist:
+				print "Apress isn't in the database yet."
+			else:
+				print "Apress is in the database."
+
+		
+		Ordering Data
+
+			>>> Publisher.objects.order_by("name")
+			[<Publisher: Apress>, <Publisher: O'Reilly>]
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			ORDER BY name;
+
+			>>> Publisher.objects.order_by("state_province", "address")
+			[<Publisher: Apress>, <Publisher: O'Reilly>]
+
+			>>> Publisher.objects.order_by("-name")
+			[<Publisher: O'Reilly>, <Publisher: Apress>]
+
+			class Publisher(models.Model):
+				name = models.CharField(max_length=30)
+				address = models.CharField(max_length=50)
+				city = models.CharField(max_length=60)
+				state_province = models.CharField(max_length=30)
+				country = models.CharField(max_length=50)
+				website = models.URLField()
+
+				def __unicode__(self):
+					return self.name
+
+				class Meta:
+					ordering = ['name']
+
+		If you specify this, it tells Django that unless an ordering is given explicitly with order_by(), all Publisher objects should be ordered by the name field whenever they¡¯re retrieved with the Django database API.
+
+		Chaining Lookups
+
+			>>> Publisher.objects.filter(country="U.S.A.").order_by("-name")
+			[<Publisher: O'Reilly>, <Publisher: Apress>]
+			>>> Publisher.objects.order_by("-name").filter(country="U.S.A.")
+			[<Publisher: O'Reilly>, <Publisher: Apress>]
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			WHERE country = 'U.S.A'
+			ORDER BY name DESC;
+
+		Slicing Data
+
+			>>> Publisher.objects.order_by('name')[0]
+			<Publisher: Apress>
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			ORDER BY name
+			LIMIT 1;
+
+			>>> Publisher.objects.order_by('name')[0:2]
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			ORDER BY name
+			OFFSET 0 LIMIT 2;
+
+			Note that negative slicing is not supported:
+
+			>>> Publisher.objects.order_by('name')[-1]
+			Traceback (most recent call last):
+			  ...
+			AssertionError: Negative indexing is not supported.
+
+			This is easy to get around, though. Just change the order_by() statement, like this:
+
+			>>> Publisher.objects.order_by('-name')[0]
+
+		Updating Multiple Objects in One Statement
+
+			>>> p = Publisher.objects.get(name='Apress')
+			>>> p.name = 'Apress Publishing'
+			>>> p.save()
+
+			SELECT id, name, address, city, state_province, country, website
+			FROM books_publisher
+			WHERE name = 'Apress';
+
+			UPDATE books_publisher SET
+				name = 'Apress Publishing',
+				address = '2855 Telegraph Ave.',
+				city = 'Berkeley',
+				state_province = 'CA',
+				country = 'U.S.A.',
+				website = 'http://www.apress.com'
+			WHERE id = 52;
+
+			(Note that this example assumes Apress has a publisher ID of 52.)
+
+			>>> Publisher.objects.filter(id=52).update(name='Apress Publishing')
+
+			UPDATE books_publisher
+			SET name = 'Apress Publishing'
+			WHERE id = 52;
+
+			>>> Publisher.objects.all().update(country='USA')
+			2
+
+			The update() method has a return value ¨C an integer representing how many records changed. In the above example, we got 2.
+
+		Deleting Objects
+
+			>>> p = Publisher.objects.get(name="O'Reilly")
+			>>> p.delete()
+			>>> Publisher.objects.all()
+			[<Publisher: Apress Publishing>]
+
+			>>> Publisher.objects.filter(country='USA').delete()
+			>>> Publisher.objects.all().delete()
+			>>> Publisher.objects.all()
+			[]
+
+			>>> Publisher.objects.filter(country='USA').delete()
+
+1. The Django Admin Site
+
+
+
+
 		

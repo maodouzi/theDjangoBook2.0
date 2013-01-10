@@ -3,8 +3,8 @@ theDjangoBook2.0
 
 # Ref
 
-	git://github.com/jacobian/djangobook.com.git
-	git://github.com/maodouzi/theDjangoBook2.0.git
+	https://github.com/jacobian/djangobook.com.git
+	https://github.com/maodouzi/theDjangoBook2.0.git
 
 # Step
 
@@ -63,6 +63,8 @@ theDjangoBook2.0
 			{% for athlete in athlete_list %}
 				<li>{{ athlete.name }}</li>
 			{% endfor %}
+
+			ifequal & comment
 
 		Filter:
 
@@ -133,7 +135,26 @@ theDjangoBook2.0
 			>>> t.render(c)
 			u'SALLY is 43 years old.'
 
-		silent_variable_failure=True make render empty string scliently if couldn't find attribute
+		If, during the method lookup, a method raises an exception, the exception will be propagated, unless the exception has an attribute silent_variable_failure whose value is True. If the exception does have a silent_variable_failure attribute, the variable will render as an empty string, for example:
+
+			>>> t = Template("My name is {{ person.first_name }}.")
+			>>> class PersonClass3:
+			...     def first_name(self):
+			...         raise AssertionError, "foo"
+			>>> p = PersonClass3()
+			>>> t.render(Context({"person": p}))
+			Traceback (most recent call last):
+			...
+			AssertionError: foo
+
+			>>> class SilentAssertionError(AssertionError):
+			...     silent_variable_failure = True
+			>>> class PersonClass4:
+			...     def first_name(self):
+			...         raise SilentAssertionError
+			>>> p = PersonClass4()
+			>>> t.render(Context({"person": p}))
+			u'My name is .'
 
 		By default, if a variable doesn¡¯t exist, the template system renders it as an empty string, failing silently
 
@@ -142,7 +163,13 @@ theDjangoBook2.0
 			>>> t.render(Context())
 			u'Your name is .'
 
-		alters_data=True make any function who wanting to modify rendering object be disabled
+		alters_data=True make any function who wanting to modify rendering object be disabled. Say, for instance, you have a BankAccount object that has a delete() method. If a template includes something like {{ account.delete }}, where account is a BankAccount object, the object would be deleted when the template is rendered! To prevent this, set the function attribute alters_data on the method:
+
+			def delete(self):
+				# Delete the account
+			delete.alters_data = True
+
+		The template system won¡¯t execute any method marked in this way. Continuing the above example, if a template includes {{ account.delete }} and the delete() method has the alters_data=True, then the delete() method will not be executed when the template is rendered. Instead, it will fail silently.
 
 		Context Objects use standard Python dictionary syntax:
 
@@ -225,4 +252,71 @@ theDjangoBook2.0
 				<p>There are no athletes. Only computer programmers.</p>
 			{% endfor %}
 
+		forloop: counter, counter0, revcounter, revcounter0, first, last, parentloop
+			
+			{% for item in todo_list %}
+				<p>{{ forloop.counter }}: {{ item }}</p>
+			{% endfor %}
+
+			{% for object in objects %}
+				{% if forloop.first %}<li class="first">{% else %}<li>{% endif %}
+				{{ object }}
+				</li>
+			{% endfor %}
+
+			{% for link in links %}{{ link }}{% if not forloop.last %} | {% endif %}{% endfor %}
+
+			{% for country in countries %}
+				<table>
+				{% for city in country.city_list %}
+					<tr>
+					<td>Country #{{ forloop.parentloop.counter }}</td>
+					<td>City #{{ forloop.counter }}</td>
+					<td>{{ city }}</td>
+					</tr>
+				{% endfor %}
+				</table>
+			{% endfor %}
+
+	1.	Ifequal Tag
+
+		ifequal / endifequal
+
+			{% ifequal var1 var2 %}
+				<h1>Site News</h1>
+			{% else %}
+				<h1>No News Here</h1>
+			{% endifequal %}
+
+		Only template variables, strings, integers, and decimal numbers are allowed as arguments to {% ifequal %}. 
+		
+			{% ifequal variable 1 %}
+			{% ifequal variable 1.23 %}
+			{% ifequal variable 'foo' %}
+			{% ifequal variable "foo" %}
+
+	1.	Comment Tag
+
+		Single line:
+
+			{# This is a comment #}
+
+		Multiple lines:
+
+			{% comment %}
+			This is a
+			multi-line comment.
+			{% endcomment %}
+
 	1.	Filter
+
+		Examples:
+
+			{{ name|lower }}
+			{{ my_list|first|upper }}
+			{{ bio|truncatewords:"30" }}
+			{{ pub_date|date:"F j, Y" }}
+
+		More details, see appendix E
+
+

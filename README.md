@@ -673,8 +673,20 @@ theDjangoBook2.0
 		email = models.EmailField(blank=True)
 		By default, all fields have blank=False, which means blank values are not allowed.
 
-		http://127.0.0.1:8000/admin/books/author/add/
+		http://localhost:8080/admin/books/author/add/
 
+	1.	Making Date and Numeric Fields Optional
+
+		PostgreSQL: ALTER TABLE books_book ALTER COLUMN publication_date DROP NOT NULL;
+
+		Sqlite Manage: Delete && Creat
+			
+			ALTER TABLE "main"."books_book" RENAME TO "oXHFcGcd04oXHFcGcd04_books_book"
+			CREATE TABLE "main"."books_book" ("id" integer PRIMARY KEY  NOT NULL ,"title" varchar(100) NOT NULL ,"publisher_id" integer NOT NULL )
+			INSERT INTO "main"."books_book" SELECT "id","title","publisher_id" FROM "main"."oXHFcGcd04oXHFcGcd04_books_book"
+			DROP TABLE "main"."oXHFcGcd04oXHFcGcd04_books_book"
+			ALTER TABLE "main"."books_book" ADD COLUMN "publication_date" DATETIME
+
+		http://localhost:8080/admin/books/book/add/
+	
 	1.	
-
-		

@@ -648,6 +648,15 @@ theDjangoBook2.0
 
 1. The Django Admin Site
 
+	1.	Admin
+		
+			$ python manage.py syncdb
+				amdin / admin
+				If choose not create admin during syncdb, shouldrun: python manage.py createsuperuser
+	
+		http://localhost:8080/admin/
+
+	1.	
 
 
 

@@ -335,3 +335,17 @@ theDjangoBook2.0
 			os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
 		Without templates file, notice the TemplateDoesNotExist error in webpage.
 
+	1. Shortcuts: render
+
+		Storing templates in subdirectories of your template directory is easy. In your calls to get_template(), just include the subdirectory name and a slash before the template name, like so:
+
+			t = get_template('dateapp/current_datetime.html')
+
+		Because render() is a small wrapper around get_template(), you can do the same thing with the second argument to render(), like this:
+
+			return render(request, 'dateapp/current_datetime.html', {'current_date': now})
+
+	1.	
+
+
+

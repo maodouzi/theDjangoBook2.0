@@ -327,6 +327,11 @@ theDjangoBook2.0
 
 		Should touch /home/djangouser/templates/mytemplate.html & fix it.
 
-	1.	
+	1.	Use django template
 
+		Notice: Don't forget to add comma in TEMPLATE_DIRS!
+		Notice: '/home/django/mysite/templates', not good because of tight coupling
+		Notice: Use '/' as path sep even in windows: 
+			os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+		Without templates file, notice the TemplateDoesNotExist error in webpage.
 

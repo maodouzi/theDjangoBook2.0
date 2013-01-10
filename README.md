@@ -319,4 +319,14 @@ theDjangoBook2.0
 
 		More details, see appendix E
 
+	1.	Template & Context
+
+		http://localhost:8080/time/
+
+	1.	Use template file by hand
+
+		Should touch /home/djangouser/templates/mytemplate.html & fix it.
+
+	1.	
+
 

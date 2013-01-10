@@ -64,7 +64,7 @@ theDjangoBook2.0
 				<li>{{ athlete.name }}</li>
 			{% endfor %}
 
-			ifequal & comment
+			ifequal & comment & include & block
 
 		Filter:
 
@@ -345,7 +345,33 @@ theDjangoBook2.0
 
 			return render(request, 'dateapp/current_datetime.html', {'current_date': now})
 
-	1.	
+	1.	Include Tag
 
+			{% include "nav.html" %}
+			{% include 'includes/nav.html' %}
+			{% include template_name %}
+			
+			# mypage.html
 
+			<html>
+			<body>
+			{% include "includes/nav.html" %}
+			<h1>{{ title }}</h1>
+			</body>
+			</html>
 
+			# includes/nav.html
+
+			<div id="nav">
+				You are in: {{ current_section }}
+			</div>
+
+	1.	Block Tag
+
+		If you use {% extends %} in a template, it must be the first template tag in that template. Otherwise, template inheritance won¡¯t work.
+	
+		If you need to get the content of the block from the parent template, use {{ block.super }}
+
+		http://localhost:8080/time/
+
+		http://localhost:8080/time/plus/3/

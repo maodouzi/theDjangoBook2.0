@@ -70,6 +70,14 @@ theDjangoBook2.0
 
 			{{ ship_date|date:"F j, Y" }}
 
+	1.	Django Shell
+
+			cd /windows/local/github/theDjangoBook2.0/mysite
+			export DJANGO_SETTINGS_MODULE=mysite.settings
+			from django.template import Template
+
+		No error means you could use django shell with your django project setting
+
 	1.	Variable
 
 		Basic:
@@ -375,3 +383,13 @@ theDjangoBook2.0
 		http://localhost:8080/time/
 
 		http://localhost:8080/time/plus/3/
+
+1.	Model
+
+	1.	DB Setting
+	
+			$ cd django_project_dir
+			$ export DJANGO_SETTINGS_MODULE=mysite.settings
+			>>> from django.db import connection
+			>>> cursor = connection.cursor()
+		

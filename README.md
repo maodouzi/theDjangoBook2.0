@@ -648,12 +648,18 @@ theDjangoBook2.0
 
 1. The Django Admin Site
 
-	1.	Admin
+	1.	Install Admin
 		
 			$ python manage.py syncdb
 				amdin / admin
 				If choose not create admin during syncdb, shouldrun: python manage.py createsuperuser
 	
+		http://localhost:8080/admin/
+
+		Try change admin email: input verify
+
+	1.	Add books to administion page
+
 		http://localhost:8080/admin/
 
 	1.	

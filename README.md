@@ -693,6 +693,10 @@ theDjangoBook2.0
 
 		http://localhost:8080/admin/books/author/add/
 		
-		first_name => First name:
-		last_name => Last name:
-		e-mail => E-mail: 
+			first_name => First name:
+			last_name => Last name:
+			e-mail => E-mail:
+
+	1.	Customizing admin change lists
+
+		http://localhost:8080/admin/books/author/

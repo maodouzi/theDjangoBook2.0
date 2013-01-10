@@ -662,8 +662,19 @@ theDjangoBook2.0
 
 		http://localhost:8080/admin/
 
+		When Django loads your URLconf from urls.py at server startup, it executes the admin.autodiscover() statement that we added as part of activating the admin. This function iterates over your INSTALLED_APPS setting and looks for a file called admin.py in each installed app. If an admin.py exists in a given app, it executes the code in that file.
+
+		In the admin.py in our books app, each call to admin.site.register() simply registers the given model with the admin. The admin site will only display an edit/change interface for models that have been explicitly registered.
+
+		The app django.contrib.auth includes its own admin.py, which is why Users and Groups showed up automatically in the admin. Other django.contrib apps, such as django.contrib.redirects, also add themselves to the admin, as do many third-party Django applications you might download from the Web.
+
+	1.	Making Fields Optional
+
+		email = models.EmailField(blank=True)
+		By default, all fields have blank=False, which means blank values are not allowed.
+
+		http://127.0.0.1:8000/admin/books/author/add/
+
 	1.	
-
-
 
 		

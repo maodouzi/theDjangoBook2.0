@@ -768,3 +768,7 @@ theDjangoBook2.0
 		remove search_form view.
 
 		http://localhost:8080/search/
+
+	1. Get Method, Search book from db, Simple validation
+
+		localhost:8080/search/?q=fffffffffffffffffffffffffffffffffffffffffffffffff

@@ -881,6 +881,12 @@ theDjangoBook2.0
 		
 		{{ form.message.errors }} displays a <ul class="errorlist"> if errors are present 
 
+	1. Customizing Form Design: error
+
+		localhost:8080/contact/
+
+		{% for error in form.message.errors %}
+
 	1. 
 
 

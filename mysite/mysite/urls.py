@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     (r'^current_url_view_good/$', current_url_view_good),
     (r'^display_meta/$', display_meta),
     (r'^search/$', search),
+    (r'^contact/$', contact),
+    (r'^contact/thanks/$', hello),
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^mysite/', include('mysite.foo.urls')),

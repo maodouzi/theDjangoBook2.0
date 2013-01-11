@@ -772,3 +772,9 @@ theDjangoBook2.0
 	1. Get Method, Search book from db, Simple validation
 
 		localhost:8080/search/?q=fffffffffffffffffffffffffffffffffffffffffffffffff
+
+	1.	Get Method, Contact 
+
+		http://localhost:8080/contact/
+
+	

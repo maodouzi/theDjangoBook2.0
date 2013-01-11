@@ -745,4 +745,6 @@ theDjangoBook2.0
 	
 		http://localhost:8080/display_meta/
 
-	1.	
+	1.	Basic Search Form
+
+		http://localhost:8080/search-form/

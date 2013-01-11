@@ -37,4 +37,7 @@ def display_meta(request):
         html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
     return HttpResponse('<table>%s</table>' % '\n'.join(html))
 
+def search_form(request):
+    return render(request, 'search_form.html')
+
 

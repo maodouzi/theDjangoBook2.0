@@ -48,6 +48,6 @@ def search(request):
         return render(request, 'search_results.html',
             {'books': books, 'query': q})
     else:
-        return HttpResponse('Please submit a search term.')
+        return render(request, 'search_form.html', {'error': True})
 
 

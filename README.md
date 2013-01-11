@@ -756,3 +756,9 @@ theDjangoBook2.0
 	1. Get Method, Search book from db
 
 		http://localhost:8080/search/?q=ddd
+
+	1. Get Method, Search book from db, add error info with color
+
+		http://localhost:8080/search/?q=
+
+	1.	

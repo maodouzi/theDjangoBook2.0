@@ -856,6 +856,10 @@ theDjangoBook2.0
 
 		localhost:8080/contact/
 
-	1.	
+	1.	Setting Initial Values
+
+		localhost:8080/contact/
+
+	1. 
 
 

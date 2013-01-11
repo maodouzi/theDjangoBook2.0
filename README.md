@@ -873,8 +873,14 @@ theDjangoBook2.0
 
 		localhost:8080/contact/
 
-	1. 
+	1. Customizing Form Design
 
-	1.	
+		localhost:8080/contact/
+
+		Error show as red.
+		
+		{{ form.message.errors }} displays a <ul class="errorlist"> if errors are present 
+
+	1. 
 
 

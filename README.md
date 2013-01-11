@@ -718,3 +718,9 @@ theDjangoBook2.0
 	1.	Customizing admin date_hierarchy
 
 		http://localhost:8080/admin/books/book/
+
+	1.	ustomizing admin default ordering
+
+		http://localhost:8080/admin/books/book/
+
+	1.	

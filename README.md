@@ -753,4 +753,6 @@ theDjangoBook2.0
 	
 		http://localhost:8080/search/?q=ddd
 
-	1. 
+	1. Get Method, Search book from db
+
+		http://localhost:8080/search/?q=ddd

@@ -13,7 +13,6 @@ urlpatterns = patterns('',
     (r'^first_app/$', first_app),
     (r'^current_url_view_good/$', current_url_view_good),
     (r'^display_meta/$', display_meta),
-    (r'^search-form/$', search_form),
     (r'^search/$', search),
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),

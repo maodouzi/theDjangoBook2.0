@@ -761,4 +761,10 @@ theDjangoBook2.0
 
 		http://localhost:8080/search/?q=
 
-	1.	
+	1.	Get Method, Search book from db, Search result / form same page
+
+		In this updated view, if a user visits /search/ with no GET parameters, he¡¯ll see the search form with no error message.
+
+		remove search_form view.
+
+		http://localhost:8080/search/

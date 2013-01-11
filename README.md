@@ -860,6 +860,17 @@ theDjangoBook2.0
 
 		localhost:8080/contact/
 
+	1. Custom Validation Rules
+
+		localhost:8080/contact/
+
+		Here clean_message map to member var: message, if you want to validate subject
+		
+			1. change name to clean_subject
+			2. change self.cleaned_data['message'] to self.cleaned_data['subject']
+
 	1. 
+
+	1.	
 
 

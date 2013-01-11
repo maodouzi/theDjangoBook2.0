@@ -736,3 +736,13 @@ theDjangoBook2.0
 	1.	Customizing admin raw id field
 
 		http://localhost:8080/admin/books/book/1/
+
+1. Forms
+
+	1.	Request Information About the URL, UA, META
+
+		http://localhost:8080/current_url_view_good/		
+	
+		http://localhost:8080/display_meta/
+
+	1.	

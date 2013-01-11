@@ -24,4 +24,17 @@ def first_app(request):
     publisher_list = Publisher.objects.all()
     return render(request, 'first_app.html', {'publisher_list': publisher_list})
 
+def current_url_view_good(request):
+    requestList = request.__dict__.items()
+    ua = request.META.get('HTTP_USER_AGENT', 'unknown')
+    return render(request, 'request_list.html', locals())
+
+def display_meta(request):
+    values = request.META.items()
+    values.sort()
+    html = []
+    for k, v in values:
+        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
+    return HttpResponse('<table>%s</table>' % '\n'.join(html))
+
 

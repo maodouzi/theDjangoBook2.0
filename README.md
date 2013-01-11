@@ -728,3 +728,9 @@ theDjangoBook2.0
 		Hidden some filed, make them un-editable
 
 		http://localhost:8080/admin/books/book/1/
+
+	1. Customizing admin filter horizon for many2many section
+
+		http://localhost:8080/admin/books/book/1/
+
+	1.	

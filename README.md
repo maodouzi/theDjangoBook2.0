@@ -781,4 +781,71 @@ theDjangoBook2.0
 
 		http://localhost:8080/contact/
 
+	1. First Form Class
+
+		Interact Environment:
+
+			$ cd /windows/local/github/theDjangoBook2.0/mysite
+		
+			>>> from contact.forms import ContactForm
+			>>> f = ContactForm()
+			>>> print f
+			<tr><th><label for="id_subject">Subject:</label></th><td><input type="text" name="subject" id="id_subject" /></td></tr>
+			<tr><th><label for="id_email">Email:</label></th><td><input type="text" name="email" id="id_email" /></td></tr>
+			<tr><th><label for="id_message">Message:</label></th><td><input type="text" name="message" id="id_message" /></td></tr>
+
+			>>> print f.as_ul()
+			<li><label for="id_subject">Subject:</label> <input type="text" name="subject" id="id_subject" /></li>
+			<li><label for="id_email">Email:</label> <input type="text" name="email" id="id_email" /></li>
+			<li><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></li>
+			>>> print f.as_p()
+			<p><label for="id_subject">Subject:</label> <input type="text" name="subject" id="id_subject" /></p>
+			<p><label for="id_email">Email:</label> <input type="text" name="email" id="id_email" /></p>
+			<p><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></p>
+			
+			>>> print f['subject']
+			<input type="text" name="subject" id="id_subject" />
+			>>> print f['message']
+			<input type="text" name="message" id="id_message" />
+
+			>>> f.is_bound
+			False
+			>>> f = ContactForm({'subject': 'Hello', 'email': 'adrian@example.com', 'message': 'Nice site!'})
+			>>> f.is_bound
+			True
+
+			>>> f.is_valid()
+			True
+
+			If we don¡¯t pass the email field, it¡¯s still valid, because we¡¯ve specified required=False for that field:
+
+			>>> f = ContactForm({'subject': 'Hello', 'message': 'Nice site!'})
+			>>> f.is_valid()
+			True
+
+			But, if we leave off either subject or message, the Form is no longer valid:
+
+			>>> f = ContactForm({'subject': 'Hello'})
+			>>> f.is_valid()
+			False
+			>>> f = ContactForm({'subject': 'Hello', 'message': ''})
+			>>> f.is_valid()
+			False
+
+			You can drill down to get field-specific error messages:
+
+			>>> f = ContactForm({'subject': 'Hello', 'message': ''})
+			>>> f['message'].errors
+			[u'This field is required.']
+			>>> f['subject'].errors
+			[]
+			>>> f['email'].errors
+			[]
+
+			>>> f = ContactForm({'subject': 'Hello', 'email': 'adrian@example.com', 'message': 'Nice site!'})
+			>>> f.is_valid()
+			True
+			>>> f.cleaned_data
+			{'message': u'Nice site!', 'email': u'adrian@example.com', 'subject': u'Hello'}
+
 

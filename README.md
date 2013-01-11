@@ -852,4 +852,10 @@ theDjangoBook2.0
 
 		localhost:8080/contact/
 
+	1. Changing text filed to textarea, add max_length to char field.
+
+		localhost:8080/contact/
+
+	1.	
+
 

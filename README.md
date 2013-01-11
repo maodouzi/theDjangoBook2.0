@@ -719,8 +719,12 @@ theDjangoBook2.0
 
 		http://localhost:8080/admin/books/book/
 
-	1.	ustomizing admin default ordering
+	1.	Customizing admin default ordering
 
 		http://localhost:8080/admin/books/book/
 
-	1.	
+	1.	Customizing admin edit filed
+
+		Hidden some filed, make them un-editable
+
+		http://localhost:8080/admin/books/book/1/

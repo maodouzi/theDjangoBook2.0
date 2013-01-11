@@ -4,6 +4,12 @@ theDjangoBook2.0
 # Ref
 
 	https://github.com/jacobian/djangobook.com.git
+
+		sudo apt-get install texlive-latex-base
+		make singlehtml
+		make latexpdf
+		make html
+
 	https://github.com/maodouzi/theDjangoBook2.0.git
 
 # Step
@@ -700,3 +706,9 @@ theDjangoBook2.0
 	1.	Customizing admin change lists
 
 		http://localhost:8080/admin/books/author/
+
+	1.	Customizing admin search field
+
+		http://localhost:8080/admin/books/author/
+	
+	1.	

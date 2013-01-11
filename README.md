@@ -703,7 +703,7 @@ theDjangoBook2.0
 			last_name => Last name:
 			e-mail => E-mail:
 
-	1.	Customizing admin change lists
+	1.	Customizing admin list display
 
 		http://localhost:8080/admin/books/author/
 
@@ -711,4 +711,8 @@ theDjangoBook2.0
 
 		http://localhost:8080/admin/books/author/
 	
+	1.	Customizing admin filter field
+		
+		http://localhost:8080/admin/books/book/
+
 	1.	

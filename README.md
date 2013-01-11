@@ -748,3 +748,9 @@ theDjangoBook2.0
 	1.	Basic Search Form
 
 		http://localhost:8080/search-form/
+
+	1.	Get Method
+	
+		http://localhost:8080/search/?q=ddd
+
+	1. 

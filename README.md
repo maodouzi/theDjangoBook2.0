@@ -715,4 +715,6 @@ theDjangoBook2.0
 		
 		http://localhost:8080/admin/books/book/
 
-	1.	
+	1.	Customizing admin date_hierarchy
+
+		http://localhost:8080/admin/books/book/

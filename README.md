@@ -777,4 +777,8 @@ theDjangoBook2.0
 
 		http://localhost:8080/contact/
 
-	
+	1. Get Method, Contact, Error keep previous data
+
+		http://localhost:8080/contact/
+
+

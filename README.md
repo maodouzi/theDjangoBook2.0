@@ -848,4 +848,8 @@ theDjangoBook2.0
 			>>> f.cleaned_data
 			{'message': u'Nice site!', 'email': u'adrian@example.com', 'subject': u'Hello'}
 
+	1. Tying Form Objects Into Views
+
+		localhost:8080/contact/
+
 
